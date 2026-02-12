@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 Teacher Evaluation Dashboard</title>
+    
+    <!-- Chart.js for beautiful charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Your custom styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <h1>Teacher Evaluation Dashboard</h1>
+            </div>
+            <div class="year-badge">2025/2026</div>
+        </header>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input 
+                    type="text" 
+                    id="teacherSearch" 
+                    placeholder="Search teacher by name..."
+                    autocomplete="off"
+                >
+                <div id="searchResults" class="search-results"></div>
+            </div>
+            
+            <div class="quick-stats">
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-label">Total Teachers</span>
+                        <span class="stat-value" id="totalTeachers">0</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-label">School Average</span>
+                        <span class="stat-value" id="schoolAvg">3.6</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon purple">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-label">Total Evaluations</span>
+                        <span class="stat-value" id="totalEvals">0</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Teacher Profile Section (Hidden until search) -->
+        <section id="teacherProfile" class="teacher-profile hidden">
+            <div class="profile-header">
+                <div class="teacher-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="teacher-title">
+                    <h2 id="teacherName">-</h2>
+                    <div class="teacher-meta">
+                        <span id="teacherYearGroups"><i class="fas fa-graduation-cap"></i> Loading...</span>
+                        <span id="teacherResponses"><i class="fas fa-clipboard-check"></i> Loading...</span>
+                    </div>
+                </div>
+                <div class="overall-rating" id="overallRating">
+                    <div class="rating-number">0.0</div>
+                    <div class="rating-stars" id="ratingStars">☆☆☆☆☆</div>
+                    <div class="rating-label">Overall Score</div>
+                </div>
+            </div>
+
+            <!-- Charts Grid -->
+            <div class="charts-grid">
+                <!-- Average Scores Chart -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3><i class="fas fa-chart-bar"></i> Average Scores by Question</h3>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="avgScoresChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Rating Distribution Chart -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3><i class="fas fa-chart-pie"></i> Rating Distribution</h3>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="ratingDistributionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Data Table -->
+            <div class="data-table-section">
+                <h3><i class="fas fa-table"></i> Detailed Evaluation Data</h3>
+                <div class="table-container">
+                    <table id="evaluationTable">
+                        <thead>
+                            <tr>
+                                <th>Question</th>
+                                <th>Rating 1</th>
+                                <th>Rating 2</th>
+                                <th>Rating 3</th>
+                                <th>Rating 4</th>
+                                <th>Total</th>
+                                <th>Average</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <!-- Dynamic content -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Export Buttons -->
+            <div class="export-section">
+                <button class="export-btn pdf" onclick="exportAsPDF()">
+                    <i class="fas fa-file-pdf"></i> Export PDF
+                </button>
+                <button class="export-btn excel" onclick="exportAsExcel()">
+                    <i class="fas fa-file-excel"></i> Export Excel
+                </button>
+                <button class="export-btn print" onclick="window.print()">
+                    <i class="fas fa-print"></i> Print
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Your JavaScript -->
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
